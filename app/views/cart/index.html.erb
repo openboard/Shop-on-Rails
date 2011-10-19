@@ -1,0 +1,20 @@
+<h1>Your Cart</h1>
+
+<% total = 0 %>
+<table>
+  <% @cart.each do |id, quantity| %>
+    <% item = Item.find(id) %>
+    <tr>
+      <td><%= image_tag item.image_url, :width => 60 %></td>
+      <td><%= item.title %></td>
+      <td width="60"><%= quantity %></td>
+      <td width="60"><%= number_to_currency item.price, :unit => "&pound;" %></td>
+      <td width="60"><%= number_to_currency item.price * quantity, :unit => "&pound;" %></td>
+    </tr>
+    <% total += quantity * item.price %>
+  <% end %>
+  <tr>
+    <td colspan="4">Total:</td>
+    <td><%= number_to_currency total, :unit => "&pound;" %></td>
+  </tr>
+</table>
